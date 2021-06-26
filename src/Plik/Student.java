@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class Student {
 
-    public void dodajStudenta(String imie, String nazwisko, ArrayList<String> oceny, String sciezkaDoPliku) throws IOException {
+    public void dodajStudenta(String imie, String nazwisko, String sciezkaDoPliku) throws IOException {
         FileWriter plik = new FileWriter(sciezkaDoPliku, true);
-        plik.append(imie + " " + nazwisko + " " + oceny + "\n");
+        plik.append(imie + " " + nazwisko + " OCENY: " + "\n");
         plik.close();
     }
 
@@ -67,16 +67,10 @@ public class Student {
         while(scanner.hasNextLine()){
             String student = scanner.nextLine();
             String[] dziel = student.split(" ");
+            String[] studentAOceny = student.split(":");
 
             if(dziel[0].equals(imie) && dziel[1].equals(nazwisko)){
-                if (dziel[2].contains("1")) listaOcen.add("1");
-                if (dziel[2].contains("2")) listaOcen.add("2");
-                if (dziel[2].contains("3")) listaOcen.add("3");
-                if (dziel[2].contains("4")) listaOcen.add("4");
-                if (dziel[2].contains("5")) listaOcen.add("5");
-                if (dziel[2].contains("6")) listaOcen.add("6");
-                listaOcen.add(ocena);
-                listaStudentow.add(dziel[0] + " " + dziel[1] + " " + listaOcen);
+                listaStudentow.add(dziel[0] + " " + dziel[1] + " OCENY: " + studentAOceny[1].substring(1, studentAOceny[1].length()) + " " + ocena);
             }else{
                 listaStudentow.add(student);
             }
